@@ -2,6 +2,8 @@ from sklearn.linear_model import LinearRegression, Lasso, Ridge
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import fetch_california_housing
 from sklearn.metrics import mean_squared_error
+from matplotlib import pyplot as plt
+
 
 def main():
     ''' main '''
@@ -32,6 +34,15 @@ def main():
     ypredict = model.predict(xtest)
     mse = mean_squared_error(ypredict, ytest)
     print(f'mse: {mse}')
+
+    # 绘图
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    index = range(len(ytest))
+    index = sorted(index, key=lambda x: ytest[x])
+    plt.plot(ypredict[index])
+    plt.plot(ytest[index])
+    plt.legend(['预测值', '真实值'])
+    plt.show()
 
 
 if __name__ == '__main__':
